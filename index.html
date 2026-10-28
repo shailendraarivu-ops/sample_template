@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Shooting Academy Sample</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231f4d3a'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23f3f4f1' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='none' stroke='%23f3f4f1' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='1.6' fill='%23f3f4f1'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout concept: range-signage look. Condensed display type, mono range data, a scoring target as the one illustration. Single column bands, left aligned. */
+:root{
+  --bg:#f3f4f1;
+  --surface:#e8ebe5;
+  --fg:#14201a;
+  --muted:#4d5b52;
+  --line:#c5cbc2;
+  --accent:#1f4d3a;
+  --on-accent:#f3f4f1;
+  --flag:#b3361f;
+  --font-display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --font-body:'Source Sans 3',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1713;--surface:#17221c;--fg:#e9ede7;--muted:#a3b0a6;--line:#2c3a32;--accent:#7fbf9c;--on-accent:#0f1713;--flag:#ee7b62;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1713;--surface:#17221c;--fg:#e9ede7;--muted:#a3b0a6;--line:#2c3a32;--accent:#7fbf9c;--on-accent:#0f1713;--flag:#ee7b62;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sample{background:var(--flag);color:#fff;font-family:var(--font-mono);font-size:13px;padding-block:10px}
+:root[data-theme="dark"] .sample,:root:not([data-theme="light"]) .sample{color:#0f1713}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .sample{color:#fff}}
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;padding-block:16px}
+.brand{font-family:var(--font-display);font-weight:700;font-size:24px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px}
+nav{display:flex;flex-wrap:wrap;gap:6px 24px;font-size:15px}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--fg);text-decoration:underline}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.05;margin:0;text-wrap:balance;text-transform:uppercase;letter-spacing:.01em}
+h1{font-size:clamp(40px,7vw,76px)}
+h2{font-size:clamp(30px,4.5vw,44px)}
+h3{font-size:24px}
+.label{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;padding-block:56px}
+.hero p.lead{font-size:20px;max-width:34em;margin:20px 0 28px;color:var(--muted)}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;font-family:var(--font-display);font-weight:600;font-size:18px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:12px 22px;border-radius:2px;border:2px solid var(--accent);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{filter:brightness(1.12)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost:hover{background:var(--surface)}
+.target{width:100%;max-width:380px;justify-self:end;height:auto}
+.target .r{stroke:var(--fg);stroke-width:1.5}
+section{padding-block:64px;border-top:1px solid var(--line)}
+section .head{display:grid;gap:10px;margin-bottom:32px;max-width:40em}
+section .head p{margin:0;color:var(--muted)}
+.programs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.prog{background:var(--surface);padding:22px;display:grid;gap:10px;align-content:start;border-top:4px solid var(--accent)}
+.prog p{margin:0;color:var(--muted);font-size:16px}
+.prog .label{color:var(--accent)}
+.table-scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:16px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+td.mono{font-family:var(--font-mono);font-size:15px;font-variant-numeric:tabular-nums}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.two>*{min-width:0}
+.rules{margin:0;padding:0;list-style:none;display:grid;gap:14px;counter-reset:r}
+.rules li{counter-increment:r;display:grid;grid-template-columns:44px 1fr;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.rules li::before{content:counter(r);font-family:var(--font-display);font-weight:700;font-size:28px;line-height:1;color:var(--accent)}
+.rules strong{display:block}
+.rules span{color:var(--muted);font-size:16px}
+form{display:grid;gap:16px}
+.field{display:grid;gap:6px}
+label{font-weight:600;font-size:15px}
+input,select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--muted);border-radius:2px;padding:10px 12px;width:100%}
+textarea{min-height:110px;resize:vertical}
+.status{min-height:1.5em;font-size:15px;color:var(--accent)}
+.contact dl{margin:0;display:grid;gap:16px}
+.contact dt{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.contact dd{margin:2px 0 0;font-size:18px}
+.ph{border-bottom:2px dashed var(--flag)}
+footer{border-top:1px solid var(--line);padding-block:32px;font-size:15px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+footer nav{gap:6px 20px}
+.doc{padding-block:56px;max-width:760px}
+.doc h2{margin-bottom:8px}
+.doc h3{margin:32px 0 8px;font-size:22px}
+.doc p,.doc li{color:var(--muted)}
+.note{background:var(--surface);border-left:4px solid var(--flag);padding:14px 16px;font-size:15px;margin:20px 0}
+@media (max-width:760px){
+  .hero .wrap,.two{grid-template-columns:1fr;gap:32px}
+  .target{justify-self:start;max-width:260px}
+  section{padding-block:48px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<div class="sample"><div class="wrap">DESIGN SAMPLE. Placeholder name, copy and details. This is not a live website.</div></div>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#top">
+    <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="16" cy="16" r="7" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="16" cy="16" r="2" fill="var(--accent)"/></svg>
+    Your Club Name
+  </a>
+  <nav aria-label="Main">
+    <a href="#programs">Programs</a>
+    <a href="#disciplines">Disciplines</a>
+    <a href="#safety">Range rules</a>
+    <a href="#book">Book a session</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div></header>
+
+<main id="home">
+  <div class="hero" id="top"><div class="wrap">
+    <div>
+      <div class="label">Rifle and pistol training</div>
+      <h1 style="margin-top:14px">Learn to shoot safely, then learn to shoot well</h1>
+      <p class="lead">Coached introduction sessions for new shooters, supervised practice for members, and a training path into club and state competition.</p>
+      <div class="btns">
+        <a class="btn primary" href="#book">Book an intro session</a>
+        <a class="btn ghost" href="#programs">See programs</a>
+      </div>
+    </div>
+    <svg class="target" viewBox="0 0 400 400" role="img" aria-label="Scoring target with a single shot near the center">
+      <circle class="r" cx="200" cy="200" r="190" fill="var(--bg)"/>
+      <circle class="r" cx="200" cy="200" r="152" fill="var(--bg)"/>
+      <circle class="r" cx="200" cy="200" r="114" fill="var(--fg)"/>
+      <circle cx="200" cy="200" r="114" fill="none" stroke="var(--bg)" stroke-width="1.5"/>
+      <circle cx="200" cy="200" r="76" fill="none" stroke="var(--bg)" stroke-width="1.5"/>
+      <circle cx="200" cy="200" r="38" fill="none" stroke="var(--bg)" stroke-width="1.5"/>
+      <circle cx="200" cy="200" r="7" fill="var(--bg)"/>
+      <circle cx="221" cy="187" r="9" fill="var(--flag)" stroke="var(--bg)" stroke-width="2"/>
+    </svg>
+  </div></div>
+
+  <section id="programs"><div class="wrap">
+    <div class="head">
+      <div class="label">Programs</div>
+      <h2>Pick the starting point that fits</h2>
+      <p>Sample program list. Replace with the club's real offerings, session lengths and fees.</p>
+    </div>
+    <div class="programs">
+      <article class="prog"><div class="label">New shooters</div><h3>Introduction session</h3><p>Range safety briefing, equipment handling and supervised first shots with a coach beside you.</p></article>
+      <article class="prog"><div class="label">Beginner to intermediate</div><h3>Rifle coaching</h3><p>Position, breathing, trigger control and sight picture, taught one skill at a time.</p></article>
+      <article class="prog"><div class="label">Beginner to intermediate</div><h3>Pistol coaching</h3><p>Grip, stance and follow-through, with drills built around scored targets.</p></article>
+      <article class="prog"><div class="label">Competitive shooters</div><h3>Competition squad</h3><p>Match preparation, score tracking and coaching for district and state events.</p></article>
+    </div>
+  </div></section>
+
+  <section id="disciplines"><div class="wrap">
+    <div class="head">
+      <div class="label">Disciplines</div>
+      <h2>Events the range can host</h2>
+      <p>Example rows using standard event names. Confirm distances, equipment and availability with the club.</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Event</th><th>Distance</th><th>Equipment</th><th>Suited to</th></tr></thead>
+        <tbody>
+          <tr><td>Air rifle</td><td class="mono">10 m</td><td>Air rifle, pellets</td><td>First-time and junior shooters</td></tr>
+          <tr><td>Air pistol</td><td class="mono">10 m</td><td>Air pistol, pellets</td><td>First-time and junior shooters</td></tr>
+          <tr><td>Rifle, standing and prone</td><td class="mono">To be confirmed</td><td>Club-supplied or own</td><td>Members preparing for matches</td></tr>
+          <tr><td>Pistol, precision</td><td class="mono">To be confirmed</td><td>Club-supplied or own</td><td>Members preparing for matches</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></section>
+
+  <section id="safety"><div class="wrap two">
+    <div>
+      <div class="label">Range rules</div>
+      <h2 style="margin:10px 0 16px">Safety comes before scores</h2>
+      <p style="color:var(--muted)">Every visitor hears these rules before handling any equipment. The club's own written rules replace this sample list.</p>
+    </div>
+    <ol class="rules">
+      <li><div><strong>Treat every firearm as loaded</strong><span>Check the chamber and action whenever you pick one up.</span></div></li>
+      <li><div><strong>Muzzle always points downrange</strong><span>Including when loading, unloading and handing over.</span></div></li>
+      <li><div><strong>Finger off the trigger until on target</strong><span>Rest it along the frame until you are ready to fire.</span></div></li>
+      <li><div><strong>Follow the range officer's commands</strong><span>Fire only on command and stop at once on a cease-fire call.</span></div></li>
+    </ol>
+  </div></section>
+
+  <section id="book"><div class="wrap two">
+    <div>
+      <div class="label">Book a session</div>
+      <h2 style="margin:10px 0 16px">Ask for an intro session</h2>
+      <p style="color:var(--muted)">This form is a layout demo. It does not send anything. On the real site it will connect to the club's chosen booking method.</p>
+    </div>
+    <form id="bookForm" novalidate>
+      <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" required></div>
+      <div class="field"><label for="interest">Interested in</label>
+        <select id="interest" name="interest">
+          <option>Introduction session</option><option>Rifle coaching</option><option>Pistol coaching</option><option>Competition squad</option>
+        </select></div>
+      <div class="field"><label for="msg">Message</label><textarea id="msg" name="msg"></textarea></div>
+      <div><button class="btn primary" type="submit">Request a session</button></div>
+      <div class="status" id="status" role="status"></div>
+    </form>
+  </div></section>
+
+  <section id="contact" class="contact"><div class="wrap two">
+    <div>
+      <div class="label">Contact</div>
+      <h2 style="margin:10px 0 16px">Visit the range</h2>
+    </div>
+    <dl>
+      <div><dt>Address</dt><dd><span class="ph">[Club address]</span></dd></div>
+      <div><dt>Phone</dt><dd><span class="ph">[Club phone number]</span></dd></div>
+      <div><dt>Range hours</dt><dd><span class="ph">[Opening hours]</span></dd></div>
+    </dl>
+  </div></section>
+</main>
+
+<main id="privacy" hidden><div class="wrap doc">
+  <div class="label">Legal</div>
+  <h2>Privacy policy</h2>
+  <div class="note">Sample template. The final policy must be written for the club and reviewed by a qualified professional before launch.</div>
+  <h3>What we collect</h3>
+  <p>Details you submit through the booking form, such as your name, phone number and the program you are interested in.</p>
+  <h3>How we use it</h3>
+  <p>To reply to your enquiry and to arrange sessions. We do not sell personal information.</p>
+  <h3>Your choices</h3>
+  <p>You can ask us to correct or delete the details you gave us by contacting the club.</p>
+  <p><a href="#top">Back to home</a></p>
+</div></main>
+
+<main id="terms" hidden><div class="wrap doc">
+  <div class="label">Legal</div>
+  <h2>Terms and conditions</h2>
+  <div class="note">Sample template. The final terms must be written for the club and reviewed by a qualified professional before launch.</div>
+  <h3>Range use</h3>
+  <p>All visitors must follow the range rules and the instructions of the range officer at all times.</p>
+  <h3>Bookings</h3>
+  <p>Session requests are not confirmed until the club replies. Fees and cancellation terms are set by the club.</p>
+  <h3>Eligibility</h3>
+  <p>Age limits and any licensing requirements follow the law and the club's own policy.</p>
+  <p><a href="#top">Back to home</a></p>
+</div></main>
+
+<footer><div class="wrap">
+  <div>Your Club Name. Design sample only.</div>
+  <nav aria-label="Legal"><a href="#privacy">Privacy policy</a><a href="#terms">Terms and conditions</a></nav>
+</div></footer>
+
+<script>
+(function(){
+  var home=document.getElementById('home'),priv=document.getElementById('privacy'),terms=document.getElementById('terms');
+  function route(){
+    var h=location.hash.replace('#','');
+    home.hidden=(h==='privacy'||h==='terms');
+    priv.hidden=h!=='privacy';
+    terms.hidden=h!=='terms';
+    if(h==='privacy'||h==='terms'){window.scrollTo(0,0);}
+  }
+  window.addEventListener('hashchange',route);route();
+  document.getElementById('bookForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=document.getElementById('name').value.trim(),p=document.getElementById('phone').value.trim(),s=document.getElementById('status');
+    if(!n||!p){s.style.color='var(--flag)';s.textContent='Enter your name and phone number to continue.';return;}
+    s.style.color='var(--accent)';
+    s.textContent='Demo only. Nothing was sent.';
+  });
+})();
+</script>
+
+</body>
+</html>
